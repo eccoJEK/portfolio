@@ -1,1 +1,22 @@
+baseURL = 'https://eccoJEK.github.io/portfolio/' # <--- Sostituisci col tuo username
+languageCode = 'en-US'
+title = 'JACK // Sound Designer'
 
+[params]
+  description = "Audio Architecture & Sound Design"
+  # Palette RAL Custom
+  bg_dark = "#1A1D20"      # RAL 7021
+  text_main = "#D7D7D7"    # RAL 7035
+  accent = "#F7B500"       # RAL 1023
+
+[menu]
+  [[menu.main]]
+    identifier = "works"
+    name = "// WORKS"
+    url = "/works/"
+    weight = 1
+  [[menu.main]]
+    identifier = "about"
+    name = "// ABOUT"
+    url = "/about/"
+    weight = 2
