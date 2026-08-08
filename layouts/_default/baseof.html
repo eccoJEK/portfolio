@@ -1,37 +1,225 @@
-{{ define "main" }}
-<section style="padding: 40px 0 70px 0;">
-  <span style="color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em;">[SOUND DESIGN / MUSIC]</span>
-  <h1 style="font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.2rem); font-weight: 400; color: var(--text-white); line-height: 1.08; margin: 16px 0 24px 0;">
-    I craft sounds for games, linear media and interactive experiences.
-  </h1>
-  
-  <div class="social-links">
-    <a href="mailto:your-email@domain.com" target="_blank">[EMAIL]</a>
-    <a href="https://github.com" target="_blank">[GITHUB]</a>
-    <a href="https://soundcloud.com" target="_blank">[SOUNDCLOUD]</a>
-    <a href="https://linkedin.com" target="_blank">[LINKEDIN]</a>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #1A1D20;
+      --bg-surface: #23272B;
+      --border-color: #383D43;
+      --text-main: #D7D7D7;
+      --text-muted: #838890;
+      --text-white: #FFFFFF;
+      --accent: #F7B500;
+      --font-display: 'DM Serif Display', serif;
+      --font-body: 'Space Grotesk', sans-serif;
+    }
 
-<section>
-  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
-    <h2 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 400; color: var(--text-white);">My best projects</h2>
-    <a href="/portfolio/works/" style="color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500;">VIEW ALL PROJECTS &rarr;</a>
-  </div>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 0 20px;
+      max-width: 1050px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-  <div class="grid">
-    {{ range where .Site.RegularPages "Params.featured" true }}
-    <a href="{{ .RelPermalink }}" class="card">
-      <div>
-        <div class="card-category">// {{ .Params.category }}</div>
-        <h3>{{ .Title }}</h3>
-        <p>{{ .Summary | truncate 100 }}</p>
-      </div>
-      <div style="font-size: 0.85rem; color: var(--text-white); font-weight: 600;">
-        OPEN PROJECT &rarr;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 400;
+      color: var(--accent);
+      font-size: 1.8rem;
+      letter-spacing: 0.02em;
+    }
+
+    .eq-bar-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      background: var(--accent);
+      animation: eqPulse 1.2s infinite ease-in-out alternate;
+    }
+
+    .eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+    .eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+    .eq-bar:nth-child(4) { height: 80%; animation-delay: 0.4s; }
+
+    @keyframes eqPulse {
+      0% { height: 20%; }
+      100% { height: 100%; }
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      padding: 50px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: cardEnter 0.5s ease-out backwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes cardEnter {
+      from { opacity: 0; transform: scale(0.96) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0px var(--accent), 0 0 15px rgba(247, 181, 0, 0.15);
+    }
+
+    .card-category {
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--text-white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 2px dashed var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-bottom: 1px dashed var(--accent);
+      transition: opacity 0.2s;
+    }
+
+    .social-links a:hover {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/portfolio/" class="brand-container">
+      <span class="brand">JEK</span>
+      <div class="eq-bar-container">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
       </div>
     </a>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
+    <nav>
+      <a href="/portfolio/works/">// PROJECTS</a>
+      <a href="/portfolio/about/">// ABOUT</a>
+    </nav>
+  </header>
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer>
+    <div>JEK — AUDIO & SOUND DESIGN</div>
+    <div>BUILT WITH ARDOUR & FMOD</div>
+  </footer>
+</body>
+</html>
