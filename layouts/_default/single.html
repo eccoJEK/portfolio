@@ -1,19 +1,19 @@
 {{ define "main" }}
 <article style="max-width: 800px; margin: 0 auto;">
-  <a href="{{ "/works/" | relURL }}" style="font-family: var(--font-mono); color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-block; margin-bottom: 32px;">&larr; BACK TO WORKS</a>
+  <a href="/portfolio/works/" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-block; margin-bottom: 24px;">&larr; RETURN TO ARCHIVE</a>
   
-  <div class="card-category" style="margin-bottom: 12px;">{{ .Params.category }}</div>
-  <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--text-white); font-weight: 700; line-height: 1.1; margin-bottom: 24px;">{{ .Title }}</h1>
+  <div class="card-category" style="margin-bottom: 8px;">// {{ .Params.category }}</div>
+  <h1 style="font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--text-white); font-weight: 800; line-height: 1.1; margin-bottom: 20px;">{{ .Title }}</h1>
   
   {{ if .Params.tech_stack }}
-  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border-color);">
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color);">
     {{ range .Params.tech_stack }}
-      <span style="font-family: var(--font-mono); background: var(--bg-surface); color: var(--text-main); padding: 6px 14px; border: 1px solid var(--border-color); font-size: 0.8rem;">{{ . }}</span>
+      <span style="background: var(--bg-surface); color: var(--accent); padding: 4px 10px; border: 1px solid var(--border-color); font-size: 0.75rem;">{{ . }}</span>
     {{ end }}
   </div>
   {{ end }}
 
-  <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+  <div style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
     {{ .Content }}
   </div>
 </article>
