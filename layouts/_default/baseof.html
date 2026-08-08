@@ -4,96 +4,237 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ .Title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #1A1D20;      /* RAL 7021 Dark */
-      --bg-card: #25282C;      /* Card Surface */
-      --text-main: #D7D7D7;    /* RAL 7035 Light Text */
-      --text-muted: #8A8E93;   /* Muted Gray */
-      --accent: #F7B500;        /* RAL 1023 Yellow Accent */
-      --font-mono: 'Courier New', Courier, monospace;
-      --font-sans: system-ui, -apple-system, sans-serif;
+      --bg-dark: #1A1D20;
+      --bg-surface: #22252A;
+      --bg-card: #272A2F;
+      --border-color: #32363C;
+      --border-active: #F7B500;
+      --text-main: #D7D7D7;
+      --text-muted: #9A9EA4;
+      --text-white: #FFFFFF;
+      --accent: #F7B500;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(247, 181, 0, 0.05) 0%, transparent 50%),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 40px;
       color: var(--text-main);
-      font-family: var(--font-sans);
+      font-family: var(--font-body);
       line-height: 1.6;
-      padding: 20px;
-      max-width: 1000px;
+      padding: 0 24px;
+      max-width: 1200px;
       margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Header Navigation */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #33373B;
-      margin-bottom: 40px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-color);
     }
-    .logo {
-      font-family: var(--font-mono);
-      font-weight: bold;
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 1.1rem;
-    }
-    nav a {
-      color: var(--text-main);
-      text-decoration: none;
-      margin-left: 20px;
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-    }
-    nav a:hover { color: var(--accent); }
 
-    /* UI Elements & Typography */
-    .tag-mono {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .brand-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-white);
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
       font-family: var(--font-mono);
-      color: var(--accent);
       font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a:hover::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      padding: 60px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
     }
 
     .card {
       background: var(--bg-card);
-      border: 1px solid #33373B;
-      padding: 20px;
+      border: 1px solid var(--border-color);
+      padding: 32px;
       text-decoration: none;
       color: var(--text-main);
-      transition: border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .card:hover { border-color: var(--accent); }
-    .card h3 { margin: 10px 0 5px 0; color: #FFFFFF; font-size: 1.2rem; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(247, 181, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--text-white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-white);
+      font-weight: 500;
+    }
 
     footer {
-      margin-top: 80px;
-      padding-top: 20px;
-      border-top: 1px solid #33373B;
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-muted);
+    }
+
+    .footer-status {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="{{ "/" | relURL }}" class="logo">// {{ .Site.Title }}</a>
+    <a href="{{ "/" | relURL }}" class="brand">
+      <div class="brand-mark"></div>
+      <span class="brand-text">{{ .Site.Title }}</span>
+    </a>
     <nav>
       {{ range .Site.Menus.main }}
         <a href="{{ .URL | relURL }}">{{ .Name }}</a>
@@ -106,8 +247,11 @@
   </main>
 
   <footer>
-    <div>SYSTEM LOG: ONLINE</div>
-    <div>PALETTE: RAL 7021 / 7035 / 1023</div>
+    <div class="footer-status">
+      <div class="status-dot"></div>
+      <span>AVAILABLE FOR PROJECTS</span>
+    </div>
+    <div>RAL 7021 / 7035 / 1023</div>
   </footer>
 </body>
 </html>
