@@ -1,26 +1,20 @@
 {{ define "main" }}
-<section style="padding: 40px 0 60px 0;">
-  <p class="tag-mono">// AUDIO ARCHITECTURE & SOUND DESIGN</p>
-  <h1 style="font-size: 3.5rem; font-weight: 900; margin: 10px 0; color: #FFFFFF;">JACK</h1>
-  <p style="color: var(--text-muted); max-width: 550px; font-size: 1.1rem;">
-    Crafting immersive sonic environments for games, linear media, and interactive experiences.
-  </p>
-</section>
-
-<section>
-  <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-    <h2 class="tag-mono" style="font-size: 1rem;">// FEATURED HIGHLIGHTS</h2>
-    <a href="{{ "/works/" | relURL }}" class="tag-mono" style="text-decoration: none;">VIEW ALL (&rarr;)</a>
-  </div>
-
-  <div class="grid">
-    {{ range where .Site.RegularPages "Params.featured" true }}
-    <a href="{{ .RelPermalink }}" class="card">
-      <span class="tag-mono">{{ .Params.category }}</span>
-      <h3>{{ .Title }}</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">{{ .Summary | truncate 90 }}</p>
-    </a>
+<article style="max-width: 800px; margin: 0 auto;">
+  <a href="{{ "/works/" | relURL }}" style="font-family: var(--font-mono); color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: inline-block; margin-bottom: 32px;">&larr; BACK TO WORKS</a>
+  
+  <div class="card-category" style="margin-bottom: 12px;">{{ .Params.category }}</div>
+  <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--text-white); font-weight: 700; line-height: 1.1; margin-bottom: 24px;">{{ .Title }}</h1>
+  
+  {{ if .Params.tech_stack }}
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border-color);">
+    {{ range .Params.tech_stack }}
+      <span style="font-family: var(--font-mono); background: var(--bg-surface); color: var(--text-main); padding: 6px 14px; border: 1px solid var(--border-color); font-size: 0.8rem;">{{ . }}</span>
     {{ end }}
   </div>
-</section>
+  {{ end }}
+
+  <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+    {{ .Content }}
+  </div>
+</article>
 {{ end }}
