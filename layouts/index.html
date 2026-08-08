@@ -1,257 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ .Title }}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #1A1D20;
-      --bg-surface: #22252A;
-      --bg-card: #272A2F;
-      --border-color: #32363C;
-      --border-active: #F7B500;
-      --text-main: #D7D7D7;
-      --text-muted: #9A9EA4;
-      --text-white: #FFFFFF;
-      --accent: #F7B500;
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
+{{ define "main" }}
+<section style="padding: 60px 0 100px 0;">
+  <div class="badge">
+    <span>AUDIO ARCHITECTURE</span>
+  </div>
+  <h1 style="font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; color: var(--text-white); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; max-width: 900px;">
+    Designing soundscapes for <span style="color: var(--accent);">interactive</span> worlds.
+  </h1>
+  <p style="color: var(--text-muted); max-width: 600px; font-size: 1.2rem; font-weight: 300; line-height: 1.7;">
+    Custom sound design, middleware implementation, and audio branding for games and linear media.
+  </p>
+</section>
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(247, 181, 0, 0.05) 0%, transparent 50%),
-        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 40px;
-      color: var(--text-main);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      padding: 0 24px;
-      max-width: 1200px;
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .brand-mark {
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-    }
-
-    .brand-text {
-      font-family: var(--font-display);
-      font-weight: 700;
-      color: var(--text-white);
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-    }
-
-    nav {
-      display: flex;
-      gap: 32px;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    nav a:hover::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--accent);
-    }
-
-    main {
-      flex: 1;
-      padding: 60px 0;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 24px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 28px;
-      margin-top: 32px;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      padding: 32px;
-      text-decoration: none;
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(247, 181, 0, 0.4);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .card-category {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .card h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--text-white);
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-white);
-      font-weight: 500;
-    }
-
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .footer-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10B981;
-      box-shadow: 0 0 8px #10B981;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <a href="{{ "/" | relURL }}" class="brand">
-      <div class="brand-mark"></div>
-      <span class="brand-text">{{ .Site.Title }}</span>
-    </a>
-    <nav>
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
-      {{ end }}
-    </nav>
-  </header>
-
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-
-  <footer>
-    <div class="footer-status">
-      <div class="status-dot"></div>
-      <span>AVAILABLE FOR PROJECTS</span>
+<section>
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);">
+    <div>
+      <span style="font-family: var(--font-mono); color: var(--accent); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">SELECTION</span>
+      <h2 style="font-family: var(--font-display); font-size: 2rem; color: var(--text-white); margin-top: 4px;">Featured Works</h2>
     </div>
-    <div>RAL 7021 / 7035 / 1023</div>
-  </footer>
-</body>
-</html>
+    <a href="{{ "/works/" | relURL }}" style="font-family: var(--font-mono); color: var(--text-white); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;">
+      ALL PROJECTS &rarr;
+    </a>
+  </div>
+
+  <div class="grid">
+    {{ range where .Site.RegularPages "Params.featured" true }}
+    <a href="{{ .RelPermalink }}" class="card">
+      <div>
+        <div class="card-meta">
+          <span class="card-category">{{ .Params.category }}</span>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary | truncate 110 }}</p>
+      </div>
+      <div class="card-footer">
+        <span>EXPLORE PROJECT</span>
+        <span>&rarr;</span>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
