@@ -1,1 +1,33 @@
+backend:
+  name: github
+  repo: eccoJEK/portfolio
+  branch: main
 
+media_folder: "static/images"
+public_folder: "/images"
+
+collections:
+  - name: "works"
+    label: "Audio projects"
+    folder: "content/works"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Project title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Highlight in Home Page?", name: "featured", widget: "boolean", default: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Game Audio", "Redesign", "Linear Film", "UI / Synth"] }
+      - { label: "Thumbnail", name: "image", widget: "image", required: false }
+      - { label: "Link Media Embed (YouTube/Soundcloud/Vimeo)", name: "media_url", widget: "string", required: false }
+      - { label: "Software / Tech Stack", name: "tech_stack", widget: "list", default: ["Ardour", "FMOD"] }
+      - { label: "Descriprion e Breakdown", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pagine Statiche"
+    files:
+      - file: "content/about.md"
+        label: "Pagina About"
+        name: "about"
+        fields:
+          - { label: "Titolo", name: "title", widget: "string" }
+          - { label: "Bio & Visione Artistica", name: "body", widget: "markdown" }
