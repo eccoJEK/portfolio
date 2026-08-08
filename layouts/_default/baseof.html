@@ -6,84 +6,98 @@
   <title>{{ .Title }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #1A1D20;
-      --bg-surface: #22252A;
-      --bg-card: #272A2F;
-      --border-color: #32363C;
-      --border-active: #F7B500;
+      --bg-surface: #23272B;
+      --border-color: #383D43;
       --text-main: #D7D7D7;
-      --text-muted: #9A9EA4;
+      --text-muted: #838890;
       --text-white: #FFFFFF;
       --accent: #F7B500;
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(247, 181, 0, 0.05) 0%, transparent 50%),
-        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 40px;
       color: var(--text-main);
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       line-height: 1.6;
-      padding: 0 24px;
-      max-width: 1200px;
+      padding: 0 20px;
+      max-width: 1050px;
       margin: 0 auto;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border-color);
+      padding: 28px 0;
+      border-bottom: 2px dashed var(--border-color);
     }
 
-    .brand {
+    .brand-container {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
     }
 
-    .brand-mark {
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
     }
 
-    .brand-text {
-      font-family: var(--font-display);
-      font-weight: 700;
-      color: var(--text-white);
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
+    /* Equalizzatore animato idle */
+    .eq-bar-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      background: var(--accent);
+      animation: eqPulse 1.2s infinite ease-in-out alternate;
+    }
+
+    .eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+    .eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+    .eq-bar:nth-child(4) { height: 80%; animation-delay: 0.4s; }
+
+    @keyframes eqPulse {
+      0% { height: 20%; }
+      100% { height: 100%; }
     }
 
     nav {
       display: flex;
-      gap: 32px;
+      gap: 24px;
     }
 
     nav a {
-      color: var(--text-muted);
+      color: var(--text-main);
       text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
       position: relative;
     }
 
@@ -91,97 +105,57 @@
       color: var(--accent);
     }
 
-    nav a:hover::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--accent);
-    }
-
     main {
       flex: 1;
-      padding: 60px 0;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 24px;
+      padding: 50px 0;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 28px;
-      margin-top: 32px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
     }
 
     .card {
-      background: var(--bg-card);
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      padding: 32px;
+      padding: 24px;
       text-decoration: none;
       color: var(--text-main);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: cardEnter 0.5s ease-out backwards;
     }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes cardEnter {
+      from { opacity: 0; transform: scale(0.96) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(247, 181, 0, 0.4);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
+      border-color: var(--accent);
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0px var(--accent), 0 0 15px rgba(247, 181, 0, 0.15);
     }
 
     .card-category {
-      font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      margin-bottom: 8px;
     }
 
     .card h3 {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--text-white);
       margin-bottom: 12px;
       line-height: 1.2;
@@ -189,56 +163,34 @@
 
     .card p {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-white);
-      font-weight: 500;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
     }
 
     footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border-color);
+      padding: 30px 0;
+      border-top: 2px dashed var(--border-color);
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-muted);
-    }
-
-    .footer-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10B981;
-      box-shadow: 0 0 8px #10B981;
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="{{ "/" | relURL }}" class="brand">
-      <div class="brand-mark"></div>
-      <span class="brand-text">{{ .Site.Title }}</span>
+    <a href="/portfolio/" class="brand-container">
+      <span class="brand">JEK</span>
+      <div class="eq-bar-container">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+      </div>
     </a>
     <nav>
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
-      {{ end }}
+      <a href="/portfolio/works/">// WORKS</a>
+      <a href="/portfolio/about/">// ABOUT</a>
     </nav>
   </header>
 
@@ -247,10 +199,7 @@
   </main>
 
   <footer>
-    <div class="footer-status">
-      <div class="status-dot"></div>
-      <span>AVAILABLE FOR PROJECTS</span>
-    </div>
+    <div>JEK — AUDIO & SOUND DESIGN</div>
     <div>RAL 7021 / 7035 / 1023</div>
   </footer>
 </body>
