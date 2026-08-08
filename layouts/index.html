@@ -1,1 +1,26 @@
+{{ define "main" }}
+<section style="padding: 40px 0 60px 0;">
+  <p class="tag-mono">// AUDIO ARCHITECTURE & SOUND DESIGN</p>
+  <h1 style="font-size: 3.5rem; font-weight: 900; margin: 10px 0; color: #FFFFFF;">JACK</h1>
+  <p style="color: var(--text-muted); max-width: 550px; font-size: 1.1rem;">
+    Crafting immersive sonic environments for games, linear media, and interactive experiences.
+  </p>
+</section>
 
+<section>
+  <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+    <h2 class="tag-mono" style="font-size: 1rem;">// FEATURED HIGHLIGHTS</h2>
+    <a href="{{ "/works/" | relURL }}" class="tag-mono" style="text-decoration: none;">VIEW ALL (&rarr;)</a>
+  </div>
+
+  <div class="grid">
+    {{ range where .Site.RegularPages "Params.featured" true }}
+    <a href="{{ .RelPermalink }}" class="card">
+      <span class="tag-mono">{{ .Params.category }}</span>
+      <h3>{{ .Title }}</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">{{ .Summary | truncate 90 }}</p>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
