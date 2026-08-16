@@ -9,14 +9,9 @@ backend:
   auth_token_endpoint: /sites/552c840e-aa32-431c-913f-fedbca47ce56/token
   gateway_url: https://gateway.decapbridge.com
 
-  # See who did what (optional)
-  commit_messages:
-    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
-    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
-    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
-    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
-    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
-    openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge
+# Percorsi multimediali obbligatori per Decap CMS
+media_folder: "static/images"
+public_folder: "/images"
 
 # Enable PKCE fields (optional, recommended)
 auth:
@@ -24,6 +19,15 @@ auth:
   first_name_claim: first_name
   last_name_claim: last_name
   avatar_url_claim: avatar_url
+
+# See who did what (optional)
+commit_messages:
+  create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+  update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+  delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+  uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+  deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+  openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge
 
 # Better Decap + Bridge logo (optional)
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
@@ -45,14 +49,14 @@ collections:
       - { label: "Thumbnail", name: "image", widget: "image", required: false }
       - { label: "Link Media Embed (YouTube/Soundcloud/Vimeo)", name: "media_url", widget: "string", required: false }
       - { label: "Software / Tech Stack", name: "tech_stack", widget: "list", default: ["Ardour", "FMOD"] }
-      - { label: "Descriprion e Breakdown", name: "body", widget: "markdown" }
+      - { label: "Description & Breakdown", name: "body", widget: "markdown" }
 
   - name: "pages"
-    label: "Pagine Statiche"
+    label: "Static Pages"
     files:
       - file: "content/about.md"
-        label: "Pagina About"
+        label: "About Page"
         name: "about"
         fields:
-          - { label: "Titolo", name: "title", widget: "string" }
-          - { label: "Bio & Visione Artistica", name: "body", widget: "markdown" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Bio & Artistic Vision", name: "body", widget: "markdown" }
