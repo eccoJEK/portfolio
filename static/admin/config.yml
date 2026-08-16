@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: eccoJEK/portfolio
+  repo: soundbyjek/portfolio
   branch: main
 
 media_folder: "static/images"
