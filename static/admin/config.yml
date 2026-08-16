@@ -1,7 +1,13 @@
 backend:
-  name: github
+  name: git-gateway
   repo: soundbyjek/portfolio
   branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/552c840e-aa32-431c-913f-fedbca47ce56/pkce
+  auth_token_endpoint: /sites/552c840e-aa32-431c-913f-fedbca47ce56/token
+  gateway_url: https://gateway.decapbridge.com
+
 
 media_folder: "static/images"
 public_folder: "/images"
