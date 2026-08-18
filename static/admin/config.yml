@@ -47,8 +47,24 @@ collections:
       - { label: "Highlight in Home Page?", name: "featured", widget: "boolean", default: false }
       - { label: "Category", name: "category", widget: "select", options: ["Game Audio", "Redesign", "Linear Film", "UI / Synth"] }
       - { label: "Thumbnail", name: "image", widget: "image", required: false }
-      - { label: "Link Media Embed (YouTube/Soundcloud/Vimeo)", name: "media_url", widget: "string", required: false }
       - { label: "Software / Tech Stack", name: "tech_stack", widget: "list", default: ["Ardour", "FMOD"] }
+
+      # --- MEDIA EMBEDS ---
+      - { label: "SoundCloud URL", name: "soundcloud_url", widget: "string", required: false, hint: "Incolla l'URL completo della traccia o playlist" }
+      - { label: "YouTube Video ID", name: "youtube_id", widget: "string", required: false, hint: "Solo l'ID finale del video (es. dQw4w9WgXcQ)" }
+      - { label: "Instagram Post ID", name: "instagram_id", widget: "string", required: false, hint: "Solo l'ID del post (es. C_xyz123456)" }
+      - { label: "TikTok Video ID", name: "tiktok_id", widget: "string", required: false, hint: "Solo l'ID numerico del video" }
+
+      # --- EXTERNAL LINKS ---
+      - label: "External Links"
+        name: "external_links"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Link Name (es. Steam, Spotify, Itch.io)", name: "name", widget: "string" }
+          - { label: "URL", name: "url", widget: "string" }
+
+      # --- BODY CONTENT ---
       - { label: "Description & Breakdown", name: "body", widget: "markdown" }
 
   - name: "pages"
