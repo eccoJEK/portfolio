@@ -1,22 +1,113 @@
 {{ define "main" }}
-<h1 style="color: red; font-size: 3rem;">LAYOUT SINGLE CARICATO</h1>
-<section style="margin-bottom: 30px;">
-  <span style="color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em;">[PORTFOLIO]</span>
-  <h1 style="font-family: var(--font-display); font-size: 3.5rem; font-weight: 400; color: var(--text-white); margin-top: 8px;">Projects</h1>
-</section>
-
-<div class="grid">
-  {{ range .Pages }}
-  <a href="{{ .RelPermalink }}" class="card">
-    <div>
-      <div class="card-category">// {{ .Params.category }}</div>
-      <h3>{{ .Title }}</h3>
-      <p>{{ .Summary | truncate 110 }}</p>
-    </div>
-    <div style="font-size: 0.85rem; color: var(--text-white); font-weight: 600;">
-      OPEN PROJECT &rarr;
-    </div>
+<article style="max-width: 850px; margin: 0 auto; padding: 20px 0;">
+  
+  <!-- Back Button -->
+  <a href="{{ "works/" | relURL }}" style="color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 28px; border: 1px solid var(--border-color); padding: 6px 12px; background: var(--bg-surface); transition: all 0.2s;">
+    &larr; BACK TO ALL PROJECTS
   </a>
+  
+  <!-- Category -->
+  {{ if .Params.category }}
+    <div class="card-category" style="font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 6px;">
+      // {{ .Params.category }}
+    </div>
   {{ end }}
-</div>
+
+  <!-- Title -->
+  <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 400; color: var(--text-white); line-height: 1.1; margin-bottom: 20px;">
+    {{ .Title }}
+  </h1>
+  
+  <!-- Tech Stack -->
+  {{ if .Params.tech_stack }}
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
+    {{ range .Params.tech_stack }}
+      <span style="background: var(--bg-surface); color: var(--accent); border: 1px solid var(--border-color); padding: 4px 12px; font-size: 0.8rem; font-family: var(--font-body);">
+        {{ . }}
+      </span>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <!-- MEDIA SECTION (Embed Flessibili) -->
+  
+  <!-- 1. SoundCloud -->
+  {{ if .Params.soundcloud_url }}
+  <div style="margin-bottom: 32px; border: 1px solid var(--border-color); background: var(--bg-surface);">
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url={{ .Params.soundcloud_url }}&color=%23f7b500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+    </iframe>
+  </div>
+  {{ end }}
+
+  <!-- 2. YouTube Embed -->
+  {{ if .Params.youtube_id }}
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 32px; border: 1px solid var(--border-color); background: #000;">
+    <iframe src="https://www.youtube.com/embed/{{ .Params.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+  {{ end }}
+
+  <!-- 3. Instagram Embed -->
+  {{ if .Params.instagram_id }}
+  <div style="display: flex; justify-content: center; margin-bottom: 32px;">
+    <iframe src="https://www.instagram.com/p/{{ .Params.instagram_id }}/embed" width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true" style="border: 1px solid var(--border-color); background: var(--bg-surface);"></iframe>
+  </div>
+  {{ end }}
+
+  <!-- 4. TikTok Embed -->
+  {{ if .Params.tiktok_id }}
+  <div style="display: flex; justify-content: center; margin-bottom: 32px;">
+    <iframe src="https://www.tiktok.com/embed/v2/{{ .Params.tiktok_id }}" width="325" height="580" frameborder="0" allowfullscreen style="border: 1px solid var(--border-color);"></iframe>
+  </div>
+  {{ end }}
+
+  <!-- External Links (Se vuoi aggiungere bottoni verso store, Steam, itch.io, ecc.) -->
+  {{ if .Params.external_links }}
+  <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+    {{ range .Params.external_links }}
+      <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-white); background: var(--bg-surface); border: 1px solid var(--border-color); padding: 8px 16px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.2s;">
+        [{{ .name | upper }}] &rarr;
+      </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <!-- Markdown Content -->
+  <div class="project-content" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main);">
+    {{ .Content }}
+  </div>
+
+</article>
+
+<style>
+  /* Styling per il contenuto del Markdown */
+  .project-content h1, .project-content h2, .project-content h3 {
+    font-family: var(--font-display);
+    color: var(--text-white);
+    margin: 32px 0 16px 0;
+    font-weight: 400;
+  }
+  .project-content p {
+    margin-bottom: 20px;
+  }
+  .project-content code {
+    background: var(--bg-surface);
+    color: var(--accent);
+    padding: 2px 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+  }
+  .project-content pre {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+  }
+  .project-content pre code {
+    padding: 0;
+    border: none;
+    background: none;
+  }
+</style>
 {{ end }}
