@@ -1,4 +1,4 @@
-baseURL = 'https://soundbyjek.github.io/portfolio/' # <--- Sostituisci col tuo username
+baseURL = 'https://soundbyjek.github.io/portfolio' # <--- Sostituisci col tuo username
 languageCode = 'en-US'
 title = 'JEK // Sound Designer'
 
@@ -13,10 +13,10 @@ title = 'JEK // Sound Designer'
   [[menu.main]]
     identifier = "works"
     name = "// WORKS"
-    url = "/works/"
+    url = "works/"
     weight = 1
   [[menu.main]]
     identifier = "about"
     name = "// ABOUT"
-    url = "/about/"
+    url = "about/"
     weight = 2
