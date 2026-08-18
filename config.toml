@@ -1,6 +1,6 @@
-baseURL = 'https://eccoJEK.github.io/portfolio/' # <--- Sostituisci col tuo username
+baseURL = 'https://soundbyjek.github.io/portfolio/' # <--- Sostituisci col tuo username
 languageCode = 'en-US'
-title = 'JACK // Sound Designer'
+title = 'JEK // Sound Designer'
 
 [params]
   description = "Audio Architecture & Sound Design"
